@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.springboot</groupId>
-	<artifactId>Oauth2-authorizedGrantType-client</artifactId>
+	<artifactId>Oauth2-authorizedGrantType-code</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>Oauth2-authorizedGrantType-client</name>
+	<name>Oauth2-authorizedGrantType-code</name>
 	<description>spring security for Spring Boot</description>
 
 	<parent>

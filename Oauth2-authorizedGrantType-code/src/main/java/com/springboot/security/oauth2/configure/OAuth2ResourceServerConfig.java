@@ -74,7 +74,6 @@ public class OAuth2ResourceServerConfig {
             OAuth2ResourceServerConfig.this.urlMetadataSource.setUrlPrefix( OAuth2ResourceServerConfig.this.getUrlPrefix());
             OAuth2ResourceServerConfig.this.urlMetadataSource.setUrlLogout( OAuth2ResourceServerConfig.this.getUrlLogout());
             http.setSharedObject(ClientDetailsService.class,clientDetailsServiceImpl);
-
             http
                     .csrf().disable()
                     .authorizeRequests()

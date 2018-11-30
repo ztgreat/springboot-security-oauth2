@@ -41,6 +41,17 @@ public class OAuth2AuthorizationServerConfig {
         AuthenticationManager authenticationManager;
 
 
+        @Autowired
+        AuthorizationEndpoint authorizationEndpoint;
+
+        @PostConstruct
+        public void init() {
+            authorizationEndpoint.setUserApprovalPage("forward:/oauth/my_confirm_access");
+//            authorizationEndpoint.setErrorPage("forward:/oauth/my_error");
+        }
+
+
+
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
@@ -64,6 +75,7 @@ public class OAuth2AuthorizationServerConfig {
                     .tokenStore(new RedisTokenStore(redisConnectionFactory))
                     .authenticationManager(authenticationManager)
                     .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+            endpoints.pathMapping("/oauth/authorize","/api/oauth/authorize");
         }
 
         @Override

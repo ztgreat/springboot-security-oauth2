@@ -24,6 +24,10 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication auth, Object o, Collection<ConfigAttribute> cas){
 
+        //如果经过了oauth2认证,则不进行后续拦截认证
+        if(auth instanceof OAuth2Authentication){
+//            return;
+        }
 
         Iterator<ConfigAttribute> iterator = cas.iterator();
         while (iterator.hasNext()) {
