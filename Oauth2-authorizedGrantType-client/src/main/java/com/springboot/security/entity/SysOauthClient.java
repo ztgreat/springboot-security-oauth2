@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author zt
  * @since 2018-11-20
  */
-public class OauthClient extends Model<OauthClient> {
+public class SysOauthClient extends Model<SysOauthClient> {
 
     private static final long serialVersionUID = 1L;
 
@@ -133,7 +133,7 @@ public class OauthClient extends Model<OauthClient> {
 
     @Override
     public String toString() {
-        return "OauthClient{" +
+        return "SysOauthClient{" +
         "clientId=" + clientId +
         ", resourceIds=" + resourceIds +
         ", clientSecret=" + clientSecret +

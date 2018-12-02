@@ -1,7 +1,7 @@
 package com.springboot.security.oauth2;
 
-import com.springboot.security.entity.OauthClient;
-import com.springboot.security.service.OauthClientService;
+import com.springboot.security.entity.SysOauthClient;
+import com.springboot.security.service.SysOauthClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -12,12 +12,12 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
 
 
     @Autowired
-    private OauthClientService oauthClientService;
+    private SysOauthClientService sysOauthClientService;
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
 
-       OauthClient client= oauthClientService.getClientByClientId(clientId);
+       SysOauthClient client= sysOauthClientService.getClientByClientId(clientId);
        if (client==null){
            return null;
        }

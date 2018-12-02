@@ -1,6 +1,6 @@
 package com.springboot.security.oauth2;
 
-import com.springboot.security.entity.OauthClient;
+import com.springboot.security.entity.SysOauthClient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -14,12 +14,12 @@ import java.util.Set;
  */
 public class ClientDetailsImpl implements ClientDetails {
 
-    private OauthClient client;
+    private SysOauthClient client;
 
     private static final String stringSplit=",";
 
 
-    public ClientDetailsImpl(OauthClient client) {
+    public ClientDetailsImpl(SysOauthClient client) {
         this.client = client;
     }
 
