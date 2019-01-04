@@ -23,18 +23,4 @@ public class TestCol {
 		return res;
 	}
 
-	@GetMapping("/product/{id}")
-	@ResponseBody
-	public String getProduct(@PathVariable String id) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		return "product id : " + id;
-	}
-
-	@GetMapping("/order/{id}")
-	@ResponseBody
-	public String getOrder(@PathVariable String id) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		return "order id : " + id;
-	}
-
 }

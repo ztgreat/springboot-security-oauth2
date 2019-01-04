@@ -4,7 +4,7 @@ package com.springboot.security.base;
 public abstract class BaseResponseEntity {
 
 	public BaseResponseEntity() {
-		this.code = CommonConstant.ZERO;
+		this.code = CommonConstant.ServerApp.SERVER_RET_SUSSCESS;
 	}
 
 	/**
