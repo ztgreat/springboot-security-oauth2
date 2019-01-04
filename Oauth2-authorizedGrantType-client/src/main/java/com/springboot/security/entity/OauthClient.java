@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author zt
  * @since 2018-11-20
  */
-public class SysOauthClient extends Model<SysOauthClient> {
+public class OauthClient extends Model<OauthClient> {
 
     private static final long serialVersionUID = 1L;
 

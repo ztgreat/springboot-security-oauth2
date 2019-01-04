@@ -4,26 +4,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.springboot.security.base.CommonConstant;
 import com.springboot.security.base.ResponseEntity;
 import com.springboot.security.base.ResponseList;
-import com.springboot.security.entity.SysMenu;
-import com.springboot.security.entity.SysOauthClient;
-import com.springboot.security.entity.SysPermission;
-import com.springboot.security.entity.SysRole;
-import com.springboot.security.entity.ins.AuthMenuTreeIns;
-import com.springboot.security.entity.ins.PermissionTreeIns;
-import com.springboot.security.entity.ins.SingleUserRolesBoIns;
-import com.springboot.security.entity.ins.UserRoleAllocationBoIns;
-import com.springboot.security.service.SysMenuService;
-import com.springboot.security.service.SysOauthClientService;
-import com.springboot.security.service.SysPermissionService;
-import com.springboot.security.service.SysRoleService;
+import com.springboot.security.entity.OauthClient;
+import com.springboot.security.service.OauthClientService;
 import com.springboot.security.util.LoggerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,24 +23,24 @@ public class SysOauthClientCol {
 	
 
 	@Autowired
-	private SysOauthClientService sysOauthClientService;
+	private OauthClientService sysOauthClientService;
 
 	
 	// 查询
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseList<SysOauthClient> page(@RequestParam(value = "current", defaultValue = "1") int current,
-											 @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
-											 @RequestParam(value = "search", defaultValue = "") String search) {
-		IPage<SysOauthClient> page = sysOauthClientService.page(current, pageSize, search);
-		ResponseList<SysOauthClient> res = new ResponseList<>(page.getRecords(), page.getTotal());
+	public ResponseList<OauthClient> page(@RequestParam(value = "current", defaultValue = "1") int current,
+                                          @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
+                                          @RequestParam(value = "search", defaultValue = "") String search) {
+		IPage<OauthClient> page = sysOauthClientService.page(current, pageSize, search);
+		ResponseList<OauthClient> res = new ResponseList<>(page.getRecords(), page.getTotal());
 		return res;
 	}
 
 	// 保存
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> saveOrUpdate(@RequestBody SysOauthClient sysOauthClient) {
+	public ResponseEntity<String> saveOrUpdate(@RequestBody OauthClient sysOauthClient) {
 
 		ResponseEntity<String> res = new ResponseEntity<>();
 		try {

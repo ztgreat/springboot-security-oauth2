@@ -1,6 +1,6 @@
 package com.springboot.security.mapper;
 
-import com.springboot.security.entity.SysOauthClient;
+import com.springboot.security.entity.OauthClient;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author zt
  * @since 2018-11-20
  */
-public interface SysOauthClientMapper extends BaseMapper<SysOauthClient> {
+public interface OauthClientMapper extends BaseMapper<OauthClient> {
 
 }

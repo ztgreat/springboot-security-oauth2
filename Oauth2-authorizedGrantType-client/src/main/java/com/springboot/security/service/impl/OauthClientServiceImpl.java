@@ -3,12 +3,10 @@ package com.springboot.security.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.springboot.security.entity.SysMenu;
-import com.springboot.security.entity.SysOauthClient;
-import com.springboot.security.entity.SysRole;
-import com.springboot.security.mapper.SysOauthClientMapper;
+import com.springboot.security.entity.OauthClient;
+import com.springboot.security.mapper.OauthClientMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.springboot.security.service.SysOauthClientService;
+import com.springboot.security.service.OauthClientService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,21 +22,21 @@ import java.util.List;
  * @since 2018-11-20
  */
 @Service
-public class SysOauthClientServiceImpl extends ServiceImpl<SysOauthClientMapper, SysOauthClient> implements SysOauthClientService {
+public class OauthClientServiceImpl extends ServiceImpl<OauthClientMapper, OauthClient> implements OauthClientService {
 
 
     @Autowired
-    private SysOauthClientMapper sysOauthClientMapper;
+    private OauthClientMapper sysOauthClientMapper;
 
     @Override
-    public SysOauthClient getClientByClientId(String clientId) {
+    public OauthClient getClientByClientId(String clientId) {
 
-        QueryWrapper<SysOauthClient> wrapper = new QueryWrapper<>();
+        QueryWrapper<OauthClient> wrapper = new QueryWrapper<>();
         clientId= StringUtils.trim(clientId);
         if (StringUtils.isNoneEmpty(clientId)) {
             wrapper.eq("client_id",clientId);
         }
-        List<SysOauthClient>clients= sysOauthClientMapper.selectList(wrapper);
+        List<OauthClient>clients= sysOauthClientMapper.selectList(wrapper);
         if(clients==null || clients.size()==0){
             return null;
         }
@@ -46,14 +44,14 @@ public class SysOauthClientServiceImpl extends ServiceImpl<SysOauthClientMapper,
     }
 
     @Override
-    public IPage<SysOauthClient> page(int pageNum, int pageSize, String search) {
+    public IPage<OauthClient> page(int pageNum, int pageSize, String search) {
 
-        QueryWrapper<SysOauthClient> wrapper = new QueryWrapper<>();
+        QueryWrapper<OauthClient> wrapper = new QueryWrapper<>();
         search=StringUtils.trim(search);
         if (StringUtils.isNoneEmpty(search)) {
             wrapper.like(true,"client_id","%" + search + "%");
         }
-        Page<SysOauthClient> page = new Page<>(pageNum,pageSize);
+        Page<OauthClient> page = new Page<>(pageNum,pageSize);
         return sysOauthClientMapper.selectPage(page,wrapper);
     }
 
