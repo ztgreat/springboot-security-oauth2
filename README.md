@@ -68,11 +68,11 @@ http://localhost:8080/oauth/authorize?response_type=code&client_id=client_2&clie
 
 ![前端登录](./Oauth2-authorizedGrantType-code/pics/前端登录.png)
 
-注意：这是前后端分离的前段页面
+注意：这是前后端分离的前端页面
 
 ### 授权页面
 
-![授权页面](./Oauth2-authorizedGrantType-code/pics\授权页面.png)
+![授权页面](./Oauth2-authorizedGrantType-code/pics/授权页面.png)
 
 
 
