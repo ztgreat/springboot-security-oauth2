@@ -11,6 +11,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * ClientDetails的实现
+ * 注:粗略实现,部分方法不完善
+ * @author ztgreat
+ * @since 2018-11-10
  */
 public class ClientDetailsImpl implements ClientDetails {
 

@@ -3,7 +3,6 @@ package com.springboot.security.auth;
 import com.springboot.security.entity.SysRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;

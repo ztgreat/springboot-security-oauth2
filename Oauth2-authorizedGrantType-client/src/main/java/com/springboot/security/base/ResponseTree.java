@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * 菜单树
  */
-public class Tree<T> {
+public class ResponseTree<T> {
 	
 	
 	private Integer id;

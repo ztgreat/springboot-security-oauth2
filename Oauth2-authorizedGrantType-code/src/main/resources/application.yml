@@ -4,7 +4,7 @@ server:
     session:
       cookie:
         http-only: true
-        name: spring-security-oauth2-manager
+        name: spring-security-oauth2-code-manager
       # 8小时   8*60*60 =28800(s)
       # session 有效时间配置在 HttpSessionConfig 文件中
       # 这里没有生效,暂未找到原因

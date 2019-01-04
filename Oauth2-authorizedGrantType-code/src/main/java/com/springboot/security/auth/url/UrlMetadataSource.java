@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.FilterInvocation;
@@ -74,7 +75,7 @@ public class UrlMetadataSource implements FilterInvocationSecurityMetadataSource
 
         //判断用户是否通过认证(包含oauth2认证和普通认证)
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        if(authentication ==null){
+        if(authentication ==null || authentication instanceof AnonymousAuthenticationToken){
             //未认证
             return SecurityConfig.createList("ROLE_LOGIN");
         }

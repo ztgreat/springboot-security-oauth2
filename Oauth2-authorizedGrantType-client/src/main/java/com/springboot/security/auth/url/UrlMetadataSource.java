@@ -1,26 +1,18 @@
 package com.springboot.security.auth.url;
-
-import com.springboot.security.auth.TokenManager;
-import com.springboot.security.auth.UserToken;
-import com.springboot.security.auth.url.MyWildcardPermission;
-import com.springboot.security.auth.url.Permission;
-import com.springboot.security.entity.SysPermission;
 import com.springboot.security.entity.SysRole;
 import com.springboot.security.entity.ins.SysPermissionIns;
 import com.springboot.security.service.SysPermissionService;
 import com.springboot.security.util.CollectionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 
@@ -74,11 +66,10 @@ public class UrlMetadataSource implements FilterInvocationSecurityMetadataSource
 
         //判断用户是否通过认证(包含oauth2认证和普通认证)
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        if(authentication ==null){
+        if(authentication ==null || authentication instanceof AnonymousAuthenticationToken){
             //未认证
             return SecurityConfig.createList("ROLE_LOGIN");
         }
-
 
         //请求url
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
