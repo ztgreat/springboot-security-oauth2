@@ -47,7 +47,7 @@ http://localhost:8080/oauth/token?client_id=client_2&client_secret=123456&grant_
 
 >error 页面，以及授权页面都没有重写，只是简单的把功能过了一遍，仅供参考，还有很多没有完善。
 >
->项目中都有响应的sql，方便测试
+>项目中都有相应的sql，方便测试
 
 
 
