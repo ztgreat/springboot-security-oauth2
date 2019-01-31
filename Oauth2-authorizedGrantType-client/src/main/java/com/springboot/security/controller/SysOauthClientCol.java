@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.springboot.security.base.CommonConstant;
 import com.springboot.security.base.ResponseEntity;
 import com.springboot.security.base.ResponseList;
+import com.springboot.security.base.ResponsePage;
 import com.springboot.security.entity.OauthClient;
 import com.springboot.security.service.OauthClientService;
 import com.springboot.security.util.LoggerUtils;
@@ -29,11 +30,11 @@ public class SysOauthClientCol {
 	// 查询
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseList<OauthClient> page(@RequestParam(value = "current", defaultValue = "1") int current,
-                                          @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
-                                          @RequestParam(value = "search", defaultValue = "") String search) {
+	public ResponsePage<OauthClient> page(@RequestParam(value = "current", defaultValue = "1") int current,
+										  @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
+										  @RequestParam(value = "search", defaultValue = "") String search) {
 		IPage<OauthClient> page = sysOauthClientService.page(current, pageSize, search);
-		ResponseList<OauthClient> res = new ResponseList<>(page.getRecords(), page.getTotal());
+		ResponsePage<OauthClient> res = new ResponsePage<>(page);
 		return res;
 	}
 
@@ -48,7 +49,7 @@ public class SysOauthClientCol {
 			res.setMsg(CommonConstant.Message.OPTION_SUCCESS);
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(),"[SysOauthClient 操作失败]" + e.getMessage());
-			res.setFailure(CommonConstant.Message.OPTION_FAILURE);
+			res.failure(CommonConstant.Message.OPTION_FAILURE);
 		}
 		return res;
 	}
@@ -65,7 +66,7 @@ public class SysOauthClientCol {
 			}
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(),"[SysOauthClient delete]" + e.getMessage());
-			res.setFailure(CommonConstant.Message.OPTION_FAILURE);
+			res.failure(CommonConstant.Message.OPTION_FAILURE);
 		}
 		return res;
 

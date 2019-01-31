@@ -1,10 +1,11 @@
 package com.springboot.security.base;
 
 import java.util.List;
+
 /**
- * 菜单树
+ * 树型数据
  */
-public class Tree<T> {
+public class ResponseTree<T>{
 	
 	
 	private Integer id;
@@ -19,6 +20,8 @@ public class Tree<T> {
 	
     private	List<T> children;
 
+	public ResponseTree() {
+	}
 
 	public List<T> getChildren() {
 		return children;

@@ -28,7 +28,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
          */
         response.setContentType("application/json;charset=utf-8");
         ResponseEntity<SysUserInfo>res= new ResponseEntity<>();
-        res.setSuccess("登录成功");
+        res.success("登录成功");
 
         UserToken token = null;
         try {

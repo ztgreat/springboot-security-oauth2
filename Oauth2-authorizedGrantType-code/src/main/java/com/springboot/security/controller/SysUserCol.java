@@ -5,6 +5,7 @@ import com.springboot.security.auth.TokenManager;
 import com.springboot.security.base.CommonConstant;
 import com.springboot.security.base.ResponseEntity;
 import com.springboot.security.base.ResponseList;
+import com.springboot.security.base.ResponsePage;
 import com.springboot.security.entity.SysUser;
 import com.springboot.security.auth.UserToken;
 import com.springboot.security.entity.ins.SysUserInfo;
@@ -36,21 +37,19 @@ public class SysUserCol {
 
 	@RequestMapping(value = "page", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseList<SysUser> page(@RequestParam(value = "current", defaultValue = "1") int current,
+	public ResponsePage<SysUser> page(@RequestParam(value = "current", defaultValue = "1") int current,
 									  @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
 									  @RequestParam(value = "search", defaultValue = "") String search,
 									  @RequestParam(value = "status", defaultValue = "") String status) {
-		ResponseList<SysUser> users = new ResponseList<SysUser>();
+		ResponsePage<SysUser> res = new ResponsePage<SysUser>();
 		try {
-			IPage<SysUser> p = sysUserService.page(current, pageSize, search);
-			users.setData(p.getRecords());
-			users.setCount(p.getTotal());
-			return users;
+			IPage<SysUser> page = sysUserService.page(current, pageSize, search);
+			return res.setPage(page);
 		} catch (RuntimeException e) {
 			LoggerUtils.error(getClass(),"[sysUser page]" + e.getMessage());
-			users.setFailure("获取失败");
-			return users;
+			res.failure("获取失败");
 		}
+		return res;
 	}
 
 
@@ -59,12 +58,9 @@ public class SysUserCol {
 	public ResponseEntity<String> save(@RequestBody SysUser user) {
 		ResponseEntity<String> res = new ResponseEntity<String>();
 		try {
-
 			sysUserService.saveUser(user);
-
 			// 关闭权限菜单时，为所有新建用户插入管理员角色
 			// sysRoleService.updateUserRole(user.getId().toString(), "1");
-
 			res.setMsg(CommonConstant.Message.OPTION_SUCCESS);
 		} catch (RuntimeException e) {
 			res.setMsg(CommonConstant.Message.OPTION_FAILURE);
@@ -97,10 +93,10 @@ public class SysUserCol {
 		try {
 			List<Integer> ids = (List<Integer>) param.get("ids");
 			String msg = sysUserService.delete(ids);
-			res.setSuccess(msg);
+			res.success(msg);
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(),"[ sysuser delete]" + e.getMessage());
-			res.setFailure(CommonConstant.Message.OPTION_FAILURE);
+			res.failure(CommonConstant.Message.OPTION_FAILURE);
 		}
 		return res;
 
@@ -120,7 +116,7 @@ public class SysUserCol {
 			res.setData(su);
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(),"获取用户登录信息失败");
-			res.setFailure(CommonConstant.Message.OPTION_FAILURE);
+			res.failure(CommonConstant.Message.OPTION_FAILURE);
 		}
 		return res;
 	}

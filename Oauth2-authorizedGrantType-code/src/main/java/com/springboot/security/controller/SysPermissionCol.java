@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.springboot.security.base.CommonConstant;
 import com.springboot.security.base.ResponseEntity;
 import com.springboot.security.base.ResponseList;
+import com.springboot.security.base.ResponsePage;
 import com.springboot.security.entity.SysPermission;
 import com.springboot.security.entity.ins.PermissionTreeIns;
 import com.springboot.security.service.SysPermissionService;
@@ -35,10 +36,10 @@ public class SysPermissionCol {
 		ResponseEntity<String> res = new ResponseEntity<String>();
 		try {
 			String s = sysPermissionService.savePermission(permission);
-			res.setSuccess(s);
+			res.success(s);
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(), "权限资源保存失败:"+e.getMessage());
-			res.setFailure(CommonConstant.Message.OPTION_FAILURE);
+			res.failure(CommonConstant.Message.OPTION_FAILURE);
 		}
 		return res;
 	}
@@ -51,10 +52,10 @@ public class SysPermissionCol {
 		List<String> ids = (List<String>)param.get("ids");
 		try {
 			String msg=sysPermissionService.deleteBatch(ids);
-			res.setSuccess(msg);
+			res.success(msg);
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(), "删除权限资源:"+e.getMessage());
-			res.setFailure("该权限可能存在数据关联,暂时无法删除");
+			res.failure("该权限可能存在数据关联,暂时无法删除");
 		}
 		return res;
 
@@ -65,22 +66,21 @@ public class SysPermissionCol {
 	 * @param parentId
 	 * @return
 	 */
-	@RequestMapping(value = "/getPermissionTree")
+	@RequestMapping(value = "/page")
 	@ResponseBody
-	public ResponseList<PermissionTreeIns> getPermissionTree(@RequestParam(value = "current", defaultValue = "1") int current,
+	public ResponsePage<PermissionTreeIns> getPermissionTree(@RequestParam(value = "current", defaultValue = "1") int current,
 															 @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
 															 @RequestParam(value = "parentId", defaultValue = "0")Integer parentId){
-		ResponseList<PermissionTreeIns> res = new ResponseList<PermissionTreeIns>();
+		ResponsePage<PermissionTreeIns> res = new ResponsePage<PermissionTreeIns>();
 		try {
 			
 			IPage<PermissionTreeIns> page=sysPermissionService.getPermissionTree(current,pageSize,parentId);
 			List<PermissionTreeIns> permissionTree=page.getRecords();
 			setTree(permissionTree);
-			res.setCount(page.getTotal());
-			res.setData(permissionTree);
+			res.setPage(page);
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(), "获取权限树失败:"+e.getMessage());
-			res.setFailure(CommonConstant.Message.OPTION_FAILURE);
+			res.failure(CommonConstant.Message.OPTION_FAILURE);
 		}
 		return res;
 	};
@@ -101,7 +101,7 @@ public class SysPermissionCol {
 			res.setData(permissionTree);
 		} catch (Exception e) {
 			LoggerUtils.error(getClass(), "获取权限树失败:"+e.getMessage());
-			res.setFailure(CommonConstant.Message.OPTION_FAILURE);
+			res.failure(CommonConstant.Message.OPTION_FAILURE);
 		}
 		return res;
 	}
